@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bossacol.com/sitemap.xml

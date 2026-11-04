@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bossacol.com/sitemap.xml
+Sitemap: https://www.bossacol.com/sitemap.xml

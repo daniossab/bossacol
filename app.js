@@ -168,18 +168,42 @@ const formC = $("#formCotizar"); // solo existe en /cotizar/
 if (formC) {
 const leerArea = () => { const n = numero($("#cArea").value); return n > 0 ? n : 0; };
 const fmt = (n, d = 0) => n.toLocaleString("es-CO", { maximumFractionDigits: d });
+const leerNiveles = () => Math.max(1, parseInt($("#cPisos").value) || 1);
+const valorRadio = n => (formC.querySelector(`input[name="${n}"]:checked`) || {}).value || "";
+const AYUDA_METODO = {
+  "Porones recuperables": "Se retiran al desmoldar y se reutilizan en la losa siguiente.",
+  "Formaleta perdida": "El icopor queda dentro de la losa y no se reutiliza.",
+  "Aligeramiento de viguetas o nervaduras": "Bloques largos de poca altura que aligeran la diferencia de altura entre los nervios o viguetas y las vigas. También se reutilizan.",
+  "No estoy seguro": "Revisamos tus planos y te recomendamos el método."
+};
+// Los porones recuperables y los bloques de viguetas se desmoldan y se reutilizan piso a piso: una obra de
+// 10 losas de 100 m² puede contratar solo 100 m² o cotizar los 1.000. Se le pregunta al cliente cuando hay
+// más de una losa. Con formaleta perdida el icopor queda en cada losa, así que se cotizan todas.
+const preguntaAlcance = () => valorRadio("metodo") !== "Formaleta perdida" && leerNiveles() > 1;
+const alcance = () => preguntaAlcance() ? valorRadio("alcance") : leerNiveles() > 1 ? "Todas las losas" : "Una sola losa";
+function areaACotizar() { // m², o null si Bossa debe recomendarla
+  const area = leerArea(), a = alcance();
+  return a.startsWith("Solo una") ? area : a === "Que Bossa recomiende" ? null : area * leerNiveles();
+}
 function estimar() {
-  const area = leerArea(), niveles = Math.max(1, parseInt($("#cPisos").value) || 1), h = +$("#cAltura").value / 100;
-  const total = area * niveles;
+  const area = leerArea(), total = area * leerNiveles(), h = +$("#cAltura").value / 100, metodo = valorRadio("metodo");
+  $("#ayudaMetodo").textContent = AYUDA_METODO[metodo] || "";
+  $("#campoAlcance").hidden = !preguntaAlcance();
+  const aCotizar = areaACotizar(), viguetas = metodo.startsWith("Aligeramiento de viguetas");
   $("#estArea").textContent = total ? fmt(total) + " m²" : "— m²";
-  $("#estVolumen").textContent = total ? fmt(total * h * 0.65, 1) + " m³" : "— m³"; // ~65 % del área ocupada por porones (orientativo)
-  $("#estCarga").textContent = total ? `${fmt(total * 0.085, 1)}–${fmt(total * 0.12, 1)} t` : "— t"; // 85–120 kg/m²
+  $("#estCotizar").textContent = !area ? "— m²" : aCotizar === null ? "Por definir" : fmt(aCotizar) + " m²";
+  // ~65 % del área ocupada por porones (orientativo); no aplica a los bloques de viguetas
+  $("#estVolumen").textContent = !area ? "— m³" : viguetas ? "Según el despiece" : aCotizar === null ? "Por definir" : fmt(aCotizar * h * 0.65, 1) + " m³";
+  // 85–120 kg/m² sobre todas las losas construidas, se reutilicen o no los porones
+  $("#estCarga").textContent = !total ? "— t" : viguetas ? "Según el diseño" : `${fmt(total * 0.085, 1)}–${fmt(total * 0.12, 1)} t`;
 }
 ["cArea", "cPisos", "cAltura"].forEach(id => $("#" + id).addEventListener("input", estimar));
+formC.addEventListener("change", e => { if (e.target.name === "metodo" || e.target.name === "alcance") estimar(); });
+estimar();
 
 const MENSAJES = {
   cCiudad: "Escribe la ciudad de la obra.",
-  cArea: "Escribe el área aproximada en m², solo con números. Por ejemplo: 450 o 1.250.",
+  cArea: "Escribe el área de cada losa en m², solo con números. Por ejemplo: 100 o 1.250.",
   cNombre: "Escribe tu nombre.",
   cCorreo: "Escribe un correo válido, por ejemplo nombre@empresa.com.",
   cTelefono: "Escribe un teléfono o WhatsApp de al menos 7 dígitos."
@@ -237,11 +261,15 @@ formC.addEventListener("submit", async e => {
 
   const d = Object.fromEntries(new FormData(formC));
   d.area = String(leerArea());
+  d.pisos = String(leerNiveles());
+  d.alcance = alcance();
+  const aCotizar = areaACotizar();
+  d.area_cotizar = aCotizar === null ? "" : String(aCotizar);
   const boton = $("button[type=submit]", formC), ok = $("#okCotizar"), error = $("#errorCotizar");
   ok.classList.remove("visible"); error.classList.remove("visible");
   boton.disabled = true;
   boton.textContent = planos.length ? "Subiendo planos…" : "Enviando…";
-  const areaTexto = fmt(+d.area, 1);
+  const losasTexto = (+d.pisos > 1 ? `${d.pisos} losas` : "una losa") + ` de ${fmt(+d.area, 1)} m²`;
 
   try {
     if (!COTIZADOR_URL) throw new Error("sin-url");
@@ -252,13 +280,13 @@ formC.addEventListener("submit", async e => {
     if (!res.ok) throw new Error(res.error || "rechazado");
 
     const nPlanos = planos.length;
-    ok.innerHTML = `<b>Solicitud enviada.</b> Recibimos tu solicitud para ${areaTexto} m² en ${escapar(d.ciudad)}${nPlanos ? ` con ${nPlanos} ${nPlanos === 1 ? "plano" : "planos"}` : ""}. Te contactaremos en máximo 48 horas hábiles. ¿Prefieres agilizar? <a href="${enlaceWA(`Hola Bossa, soy ${d.nombre}. Acabo de enviar una solicitud de cotización para un proyecto ${d.tipo.toLowerCase()} de ${areaTexto} m² en ${d.ciudad}.`)}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>.`;
+    ok.innerHTML = `<b>Solicitud enviada.</b> Recibimos tu solicitud para ${losasTexto} en ${escapar(d.ciudad)}${nPlanos ? ` con ${nPlanos} ${nPlanos === 1 ? "plano" : "planos"}` : ""}. Te contactaremos en máximo 48 horas hábiles. ¿Prefieres agilizar? <a href="${enlaceWA(`Hola Bossa, soy ${d.nombre}. Acabo de enviar una solicitud de cotización para ${losasTexto} en ${d.ciudad} (${d.metodo.toLowerCase()}).`)}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>.`;
     ok.classList.add("visible");
     formC.reset(); planos = []; pintarPlanos(); estimar();
     requeridos.forEach(c => c.removeAttribute("aria-invalid"));
   } catch (err) {
     console.error("Cotizador:", err);
-    const wa = enlaceWA(`Hola Bossa, soy ${d.nombre} y quiero cotizar un proyecto ${d.tipo.toLowerCase()} de ${areaTexto} m² en ${d.ciudad} (${d.sistema}, porón de ${d.altura} cm).`);
+    const wa = enlaceWA(`Hola Bossa, soy ${d.nombre} y quiero cotizar un proyecto ${d.tipo.toLowerCase()} en ${d.ciudad}: ${losasTexto}, ${d.metodo.toLowerCase()}, ${d.sistema.toLowerCase()}, altura de ${d.altura} cm. Área a cotizar: ${d.alcance.toLowerCase()}.`);
     error.innerHTML = err.message === "sin-url"
       ? `El envío del cotizador todavía no está activado en esta página. Mientras tanto, <a href="${wa}" target="_blank" rel="noopener">envíanos tu solicitud por WhatsApp</a>.`
       : `No pudimos enviar la solicitud. Revisa tu conexión e inténtalo de nuevo; tus datos siguen en el formulario. Si el problema continúa, <a href="${wa}" target="_blank" rel="noopener">envíanos la solicitud por WhatsApp</a>.`;

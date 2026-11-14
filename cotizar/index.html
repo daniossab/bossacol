@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.className = "js";</script>
-<title>Cotizar losa aligerada con porones de icopor en Medellín | Bossa</title>
-<meta name="description" content="Envía los planos de tu proyecto y recibe la cotización de porones de icopor (EPS) con despiece, fabricación e instalación en Medellín y el Valle de Aburrá.">
+<title>Cotizar casetones para losa aligerada en Medellín | Bossa</title>
+<meta name="description" content="Envía los planos de tu proyecto y recibe la cotización de casetones de icopor (EPS) con despiece, fabricación, transporte, instalación y recogida en Medellín y el Valle de Aburrá.">
 <link rel="canonical" href="https://www.bossacol.com/cotizar/">
 <link rel="icon" href="/img/logo-bossa-marca.svg" type="image/svg+xml">
 <link rel="icon" href="/img/icono-bossa-180.png" type="image/png" sizes="180x180">
@@ -15,8 +15,8 @@
 <meta property="og:locale" content="es_CO">
 <meta property="og:site_name" content="Bossa">
 <meta property="og:url" content="https://www.bossacol.com/cotizar/">
-<meta property="og:title" content="Cotizar losa aligerada con porones de icopor en Medellín | Bossa">
-<meta property="og:description" content="Envía los planos de tu proyecto y recibe la cotización de porones de icopor (EPS) con despiece, fabricación e instalación en Medellín y el Valle de Aburrá.">
+<meta property="og:title" content="Cotizar casetones para losa aligerada en Medellín | Bossa">
+<meta property="og:description" content="Envía los planos de tu proyecto y recibe la cotización de casetones de icopor (EPS) con despiece, fabricación, transporte, instalación y recogida en Medellín y el Valle de Aburrá.">
 <meta property="og:image" content="https://www.bossacol.com/img/og-bossa.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -61,20 +61,21 @@
   <div class="contenedor">
     <nav class="migas" aria-label="Ruta de navegación"><ol><li><a href="/">Inicio</a></li><li aria-current="page">Cotizar</li></ol></nav>
     <div class="tablero">
-      <h1 class="franja">Cotiza tu proyecto de losa aligerada</h1>
+      <h1 class="franja">Cotiza los casetones de tu losa aligerada</h1>
       <div class="cotizar-cuerpo">
         <aside class="lateral-cotizar"><div class="lateral-pegado">
           <p class="entrada">Cuéntanos de tu obra y te enviamos una propuesta. Un asesor técnico te contactará con la cotización formal.</p>
           <ul class="lista-check">
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>Despiece y diseño de porones sin costo</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>Fabricación e instalación en obra</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>Despiece y diseño de casetones sin costo</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>Fabricación, transporte, instalación y recogida</li>
             <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>Respuesta en menos de 48 horas hábiles</li>
           </ul>
           <div class="estimador" aria-live="polite">
             <h2>Estimación preliminar</h2>
             <dl>
-              <div><dt>Área a aligerar</dt><dd id="estArea">— m²</dd></div>
-              <div><dt>Volumen aprox. de EPS</dt><dd id="estVolumen">— m³</dd></div>
+              <div><dt>Área total de losas</dt><dd id="estArea">— m²</dd></div>
+              <div><dt>Área a cotizar</dt><dd id="estCotizar">— m²</dd></div>
+              <div><dt>Volumen aprox. de EPS a cotizar</dt><dd id="estVolumen">— m³</dd></div>
               <div><dt>Carga muerta evitada (85–120 kg/m²)</dt><dd id="estCarga">— t</dd></div>
             </dl>
             <small>Valores orientativos. La cantidad real depende del diseño estructural.</small>
@@ -107,9 +108,19 @@
                   <label class="chip"><input type="radio" name="tipo" value="Institucional"><span>Institucional</span></label>
                 </div>
               </div>
+              <div class="campo ancho">
+                <span class="etiqueta-campo" id="etMetodo">Método de aligeramiento</span>
+                <div class="opciones-chip" role="radiogroup" aria-labelledby="etMetodo" aria-describedby="ayudaMetodo">
+                  <label class="chip"><input type="radio" name="metodo" value="Porones recuperables" checked><span>Porones recuperables</span></label>
+                  <label class="chip"><input type="radio" name="metodo" value="Formaleta perdida"><span>Formaleta perdida</span></label>
+                  <label class="chip"><input type="radio" name="metodo" value="Aligeramiento de viguetas o nervaduras"><span>Viguetas o nervaduras</span></label>
+                  <label class="chip"><input type="radio" name="metodo" value="No estoy seguro"><span>No estoy seguro</span></label>
+                </div>
+                <small class="ayuda-campo" id="ayudaMetodo">Se retiran al desmoldar y se reutilizan en la losa siguiente.</small>
+              </div>
               <div class="campo"><label for="cCiudad">Ciudad de la obra *</label><input id="cCiudad" name="ciudad" required autocomplete="address-level2" aria-describedby="e-cCiudad"><span class="error-campo" id="e-cCiudad"></span></div>
               <div class="campo">
-                <label for="cSistema">Sistema de losa</label>
+                <label for="cSistema">Tipo de losa</label>
                 <select id="cSistema" name="sistema">
                   <option>Losa aligerada en una dirección</option>
                   <option>Losa reticular (dos direcciones)</option>
@@ -118,9 +129,19 @@
                   <option>Aún no lo sé</option>
                 </select>
               </div>
-              <div class="campo"><label for="cArea">Área aproximada (m²) *</label><input id="cArea" name="area" type="text" inputmode="decimal" required placeholder="Ej. 450" aria-describedby="e-cArea"><span class="error-campo" id="e-cArea"></span></div>
+              <div class="campo"><label for="cArea">Área de cada losa (m²) *</label><input id="cArea" name="area" type="text" inputmode="decimal" required placeholder="Ej. 100" aria-describedby="e-cArea"><span class="error-campo" id="e-cArea"></span></div>
+              <div class="campo"><label for="cPisos">Número de losas o niveles</label><input id="cPisos" name="pisos" type="number" inputmode="numeric" min="1" value="1"></div>
+              <div class="campo ancho" id="campoAlcance" hidden>
+                <span class="etiqueta-campo" id="etAlcance">¿Qué área quieres cotizar?</span>
+                <div class="opciones-chip" role="radiogroup" aria-labelledby="etAlcance" aria-describedby="ayudaAlcance">
+                  <label class="chip"><input type="radio" name="alcance" value="Solo una losa (reutilización piso a piso)" checked><span>Solo una losa</span></label>
+                  <label class="chip"><input type="radio" name="alcance" value="Todas las losas"><span>Todas las losas</span></label>
+                  <label class="chip"><input type="radio" name="alcance" value="Que Bossa recomiende"><span>Que Bossa me asesore</span></label>
+                </div>
+                <small class="ayuda-campo" id="ayudaAlcance">Los porones y los bloques se desmoldan y vuelven a usarse en la losa siguiente: puedes contratar el área de una losa e ir reutilizándola piso a piso, o cotizar todas las losas.</small>
+              </div>
               <div class="campo">
-                <label for="cAltura">Altura del porón</label>
+                <label for="cAltura">Altura del porón o bloque</label>
                 <select id="cAltura" name="altura">
                   <option value="10">10 cm</option><option value="15">15 cm</option>
                   <option value="20" selected>20 cm</option><option value="25">25 cm</option>
@@ -128,7 +149,6 @@
                   <option value="40">40 cm</option>
                 </select>
               </div>
-              <div class="campo"><label for="cPisos">Número de losas o niveles</label><input id="cPisos" name="pisos" type="number" inputmode="numeric" min="1" value="1"></div>
               <div class="campo">
                 <label for="cServicio">Servicio requerido</label>
                 <select id="cServicio" name="servicio">
@@ -169,7 +189,7 @@
     <div class="columnas">
       <div>
         <div class="logo-pie"><img src="/img/logo-bossa-vertical-blanco.svg" width="255" height="240" alt="Bossa" loading="lazy"></div>
-        <p>Fabricación e instalación de porones de EPS para aligeramiento de losas en Medellín y el Valle de Aburrá.</p>
+        <p>Fabricación, transporte, instalación y recogida de casetones de icopor (EPS) para aligeramiento de losas en Medellín y el Valle de Aburrá.</p>
       </div>
       <nav aria-label="Pie de página">
         <h2>Navegación</h2>
@@ -184,7 +204,7 @@
       <div>
         <h2>Productos</h2>
         <ul>
-          <li><a href="/cotizar/">Porones para losa</a></li>
+          <li><a href="/cotizar/">Casetones para losa</a></li>
           <li><a href="/tienda/">Láminas de icopor</a></li>
           <li><a href="/tienda/">Bloques de icopor</a></li>
           <li><a href="/tienda/">Cortes a la medida</a></li>

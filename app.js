@@ -27,43 +27,8 @@ const sinMovimiento = () => matchMedia("(prefers-reduced-motion: reduce)").match
 const SALIDA = "cubic-bezier(0.23, 1, 0.32, 1)";
 
 /* ========= TIENDA ========= */
-const contProductos = $("#productos"); // solo existe en /tienda/
-if (contProductos) contProductos.innerHTML = PRODUCTOS.map(p => `
-  <article class="producto" id="${p.id}" data-cat="${p.cat}" data-id="${p.id}">
-    <div class="visual">
-      <img src="/img/${p.img}.jpg" srcset="/img/${p.img}-480.jpg 480w, /img/${p.img}.jpg 800w" sizes="(min-width: 1101px) 300px, (min-width: 641px) 48vw, 100vw" width="800" height="800" alt="${p.alt}" loading="lazy" decoding="async">
-      <span class="insignia">${p.insignia}</span>
-    </div>
-    <div class="info">
-      <h2>${p.nombre}</h2>
-      <p>${p.desc}</p>
-      <div class="campo">
-        <label for="var-${p.id}">${p.etiqueta}</label>
-        <select id="var-${p.id}" class="variante">
-          ${p.opciones.map((n, i) => `<option value="${i}">${n}</option>`).join("")}
-        </select>
-      </div>
-      ${p.medidas ? `
-      <fieldset class="medidas">
-        <legend>Medidas (cm)</legend>
-        <div class="fila-medidas">
-          <label>Ancho<input type="text" class="dim" data-dim="ancho" inputmode="decimal" autocomplete="off"></label>
-          <label>Largo<input type="text" class="dim" data-dim="largo" inputmode="decimal" autocomplete="off"></label>
-          <label>Alto<input type="text" class="dim" data-dim="alto" inputmode="decimal" autocomplete="off"></label>
-        </div>
-        <span class="error-medidas" role="alert"></span>
-      </fieldset>` : ""}
-      <div class="compra">
-        <span class="etiqueta-campo" id="cant-${p.id}">Cantidad</span>
-        <div class="cantidad" role="group" aria-labelledby="cant-${p.id}">
-          <button type="button" class="menos" aria-label="Restar una unidad">−</button>
-          <input type="number" class="cant" value="1" min="1" inputmode="numeric" aria-labelledby="cant-${p.id}">
-          <button type="button" class="mas" aria-label="Sumar una unidad">+</button>
-        </div>
-      </div>
-      <button class="boton agregar" type="button">Agregar al pedido</button>
-    </div>
-  </article>`).join("");
+// Las tarjetas de producto están escritas en tienda/index.html (HTML estático para buscadores).
+// Si cambias un producto aquí, cambia también su tarjeta allá.
 
 const CLAVE_CARRITO = "bossa-pedido-v2"; // v2: pedido sin precios
 let carrito = [];

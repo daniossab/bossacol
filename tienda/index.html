@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/estilos.css">
+<link rel="stylesheet" href="/estilos.css?v=20261117">
 </head>
 <body>
 
@@ -71,7 +71,119 @@
           <button type="button" class="filtro" data-filtro="bloque" aria-pressed="false">Bloques</button>
         </div>
       </div>
-      <div class="marco-productos"><div class="rejilla-productos" id="productos"></div></div>
+      <div class="marco-productos"><div class="rejilla-productos" id="productos">
+        <!-- Tarjetas estáticas para buscadores. Si cambias un producto, cámbialo también en PRODUCTOS de app.js. -->
+        <article class="producto" id="bloque-madre" data-cat="bloque" data-id="bloque-madre">
+          <div class="visual">
+            <img src="/img/tienda-bloque-madre.jpg" srcset="/img/tienda-bloque-madre-480.jpg 480w, /img/tienda-bloque-madre.jpg 800w" sizes="(min-width: 1101px) 300px, (min-width: 641px) 48vw, 100vw" width="800" height="800" alt="Bloque de icopor blanco de forma rectangular" loading="lazy" decoding="async">
+            <span class="insignia">2 × 1 × 0,6 m</span>
+          </div>
+          <div class="info">
+            <h2>Bloque madre</h2>
+            <p>Bloque macizo de EPS de 2,00 × 1,00 × 0,60 m para corte y fabricación.</p>
+            <div class="campo">
+              <label for="var-bloque-madre">Densidad</label>
+              <select id="var-bloque-madre" class="variante"><option value="0">Densidad 15 kg/m³</option><option value="1">Densidad 20 kg/m³</option><option value="2">Densidad 30 kg/m³</option></select>
+            </div>
+            <div class="compra">
+              <span class="etiqueta-campo" id="cant-bloque-madre">Cantidad</span>
+              <div class="cantidad" role="group" aria-labelledby="cant-bloque-madre">
+                <button type="button" class="menos" aria-label="Restar una unidad">−</button>
+                <input type="number" class="cant" value="1" min="1" inputmode="numeric" aria-labelledby="cant-bloque-madre">
+                <button type="button" class="mas" aria-label="Sumar una unidad">+</button>
+              </div>
+            </div>
+            <button class="boton agregar" type="button">Agregar al pedido</button>
+          </div>
+        </article>
+        <article class="producto" id="lamina" data-cat="lamina" data-id="lamina">
+          <div class="visual">
+            <img src="/img/tienda-lamina.jpg" srcset="/img/tienda-lamina-480.jpg 480w, /img/tienda-lamina.jpg 800w" sizes="(min-width: 1101px) 300px, (min-width: 641px) 48vw, 100vw" width="800" height="800" alt="Láminas de icopor de varios espesores apiladas en escalera" loading="lazy" decoding="async">
+            <span class="insignia">2 × 1 m</span>
+          </div>
+          <div class="info">
+            <h2>Lámina de icopor</h2>
+            <p>Lámina de EPS de 2,00 × 1,00 m para aislamiento, cielos rasos, empaque y manualidades.</p>
+            <div class="campo">
+              <label for="var-lamina">Espesor</label>
+              <select id="var-lamina" class="variante"><option value="0">Espesor 2 cm</option><option value="1">Espesor 5 cm</option><option value="2">Espesor 10 cm</option><option value="3">Espesor 15 cm</option><option value="4">Espesor 20 cm</option><option value="5">Espesor 25 cm</option><option value="6">Espesor 30 cm</option></select>
+            </div>
+            <div class="compra">
+              <span class="etiqueta-campo" id="cant-lamina">Cantidad</span>
+              <div class="cantidad" role="group" aria-labelledby="cant-lamina">
+                <button type="button" class="menos" aria-label="Restar una unidad">−</button>
+                <input type="number" class="cant" value="1" min="1" inputmode="numeric" aria-labelledby="cant-lamina">
+                <button type="button" class="mas" aria-label="Sumar una unidad">+</button>
+              </div>
+            </div>
+            <button class="boton agregar" type="button">Agregar al pedido</button>
+          </div>
+        </article>
+        <article class="producto" id="lamina-medida" data-cat="lamina" data-id="lamina-medida">
+          <div class="visual">
+            <img src="/img/tienda-lamina-medida.jpg" srcset="/img/tienda-lamina-medida-480.jpg 480w, /img/tienda-lamina-medida.jpg 800w" sizes="(min-width: 1101px) 300px, (min-width: 641px) 48vw, 100vw" width="800" height="800" alt="Pila de láminas de icopor cortadas a la medida" loading="lazy" decoding="async">
+            <span class="insignia">A la medida</span>
+          </div>
+          <div class="info">
+            <h2>Lámina de icopor a la medida</h2>
+            <p>Cortamos la lámina con las medidas que necesites.</p>
+            <div class="campo">
+              <label for="var-lamina-medida">Densidad</label>
+              <select id="var-lamina-medida" class="variante"><option value="0">Densidad 15 kg/m³</option><option value="1">Densidad 20 kg/m³</option><option value="2">Densidad 30 kg/m³</option></select>
+            </div>
+            <fieldset class="medidas">
+              <legend>Medidas (cm)</legend>
+              <div class="fila-medidas">
+                <label>Ancho<input type="text" class="dim" data-dim="ancho" inputmode="decimal" autocomplete="off"></label>
+                <label>Largo<input type="text" class="dim" data-dim="largo" inputmode="decimal" autocomplete="off"></label>
+                <label>Alto<input type="text" class="dim" data-dim="alto" inputmode="decimal" autocomplete="off"></label>
+              </div>
+              <span class="error-medidas" role="alert"></span>
+            </fieldset>
+            <div class="compra">
+              <span class="etiqueta-campo" id="cant-lamina-medida">Cantidad</span>
+              <div class="cantidad" role="group" aria-labelledby="cant-lamina-medida">
+                <button type="button" class="menos" aria-label="Restar una unidad">−</button>
+                <input type="number" class="cant" value="1" min="1" inputmode="numeric" aria-labelledby="cant-lamina-medida">
+                <button type="button" class="mas" aria-label="Sumar una unidad">+</button>
+              </div>
+            </div>
+            <button class="boton agregar" type="button">Agregar al pedido</button>
+          </div>
+        </article>
+        <article class="producto" id="bloque-medida" data-cat="bloque" data-id="bloque-medida">
+          <div class="visual">
+            <img src="/img/tienda-bloque-medida.jpg" srcset="/img/tienda-bloque-medida-480.jpg 480w, /img/tienda-bloque-medida.jpg 800w" sizes="(min-width: 1101px) 300px, (min-width: 641px) 48vw, 100vw" width="800" height="800" alt="Bloques de icopor de distintos tamaños" loading="lazy" decoding="async">
+            <span class="insignia">A la medida</span>
+          </div>
+          <div class="info">
+            <h2>Bloque de icopor a la medida</h2>
+            <p>Cortamos el bloque con las medidas que necesites.</p>
+            <div class="campo">
+              <label for="var-bloque-medida">Densidad</label>
+              <select id="var-bloque-medida" class="variante"><option value="0">Densidad 15 kg/m³</option><option value="1">Densidad 20 kg/m³</option><option value="2">Densidad 30 kg/m³</option></select>
+            </div>
+            <fieldset class="medidas">
+              <legend>Medidas (cm)</legend>
+              <div class="fila-medidas">
+                <label>Ancho<input type="text" class="dim" data-dim="ancho" inputmode="decimal" autocomplete="off"></label>
+                <label>Largo<input type="text" class="dim" data-dim="largo" inputmode="decimal" autocomplete="off"></label>
+                <label>Alto<input type="text" class="dim" data-dim="alto" inputmode="decimal" autocomplete="off"></label>
+              </div>
+              <span class="error-medidas" role="alert"></span>
+            </fieldset>
+            <div class="compra">
+              <span class="etiqueta-campo" id="cant-bloque-medida">Cantidad</span>
+              <div class="cantidad" role="group" aria-labelledby="cant-bloque-medida">
+                <button type="button" class="menos" aria-label="Restar una unidad">−</button>
+                <input type="number" class="cant" value="1" min="1" inputmode="numeric" aria-labelledby="cant-bloque-medida">
+                <button type="button" class="mas" aria-label="Sumar una unidad">+</button>
+              </div>
+            </div>
+            <button class="boton agregar" type="button">Agregar al pedido</button>
+          </div>
+        </article>
+      </div></div>
       <p class="nota-tienda">El precio y el costo de envío te los confirmamos por WhatsApp según el producto, la cantidad y tu ciudad. ¿Necesitas casetones para una losa? <a href="/cotizar/">Cotiza tu proyecto</a>.</p>
     </div>
   </div>
@@ -115,7 +227,7 @@
         </dl>
       </div>
     </div>
-    <div class="legal">© <span id="anio"></span> Bossa. Todos los derechos reservados.</div>
+    <div class="legal">© <span id="anio">2026</span> Bossa. Todos los derechos reservados.</div>
   </div>
 </footer>
 <div class="velo" id="velo"></div>
@@ -129,11 +241,11 @@
   </footer>
 </aside>
 
-<a class="whatsapp" id="botonWhatsapp" href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+<a class="whatsapp" id="botonWhatsapp" href="https://wa.me/573104361293?text=Hola%20Bossa%2C%20quiero%20informaci%C3%B3n%20sobre%20aligeramiento%20de%20losas%20con%20EPS." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 0 1 12 2.2a9.8 9.8 0 0 1 0 19.6zM12 0a12 12 0 0 0-10.3 18.1L0 24l6.1-1.6A12 12 0 1 0 12 0z"/></svg>
 </a>
 
 
-<script src="/app.js"></script>
+<script src="/app.js?v=20261117" defer></script>
 </body>
 </html>

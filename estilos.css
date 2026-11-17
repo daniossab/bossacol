@@ -91,6 +91,7 @@ section { scroll-margin-top: calc(var(--alto-barra) + 8px); }
 .hero { background: var(--fondo); padding: var(--e2) 0; }
 .hero .contenedor { max-width: 1408px; padding-left: 24px; padding-right: 24px; }
 .hero .tablero { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; grid-template-areas: "titulo armado" "texto armado" "acciones armado"; }
+.hero h1 .antetitulo { display: block; margin-bottom: .7em; font-size: max(.95rem, .3em); font-weight: 700; font-stretch: 100%; line-height: 1.25; letter-spacing: 0; }
 .hero h1 { grid-area: titulo; padding: 40px 40px 0; font-size: clamp(2.2rem, min(3.7vw, 6.6vh), 3.6rem); font-weight: 850; font-stretch: 108%; line-height: .98; letter-spacing: -0.02em; }
 .hero-texto { grid-area: texto; padding: 20px 40px 0; }
 .hero-texto .bajada { font-size: 1.05rem; color: var(--texto); max-width: 52ch; }
@@ -307,6 +308,7 @@ form.formulario { padding: 8px 32px 32px; min-width: 0; }
 .guia:last-child { border-bottom: 0; }
 .guia { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); gap: 6px 48px; padding: 26px 0; border-bottom: var(--filete-fino); }
 .guia h3 { grid-column: 2; font-size: 1.3rem; }
+.fecha-guia { margin: 0 0 1em; font-size: .85rem; color: var(--tinta); opacity: .75; }
 .guia .meta { grid-column: 1; grid-row: 1 / span 3; font-weight: 750; font-stretch: 85%; font-size: .82rem; letter-spacing: .05em; text-transform: uppercase; color: var(--tinta); padding-top: 4px; }
 .guia > p, .guia .detalle, .guia .leer { grid-column: 2; }
 .guia > p { max-width: 64ch; }

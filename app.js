@@ -8,7 +8,7 @@ const PRODUCTOS = [
     desc: "Bloque macizo de EPS de 2,00 × 1,00 × 0,60 m para corte y fabricación.",
     etiqueta: "Densidad", opciones: DENSIDADES, img: "tienda-bloque-madre", alt: "Bloque de icopor blanco de forma rectangular" },
   { id: "lamina", cat: "lamina", insignia: "2 × 1 m", nombre: "Lámina de icopor",
-    desc: "Lámina de EPS de 2,00 × 1,00 m para aislamiento, cielos rasos, empaque y manualidades.",
+    desc: "Lámina de EPS de 2,00 × 1,00 m en densidad 15 kg/m³, para aislamiento, cielos rasos, empaque y manualidades.",
     etiqueta: "Espesor", opciones: ["2 cm", "5 cm", "10 cm", "15 cm", "20 cm", "25 cm", "30 cm"].map(e => "Espesor " + e), img: "tienda-lamina", alt: "Láminas de icopor de varios espesores apiladas en escalera" },
   { id: "lamina-medida", cat: "lamina", insignia: "A la medida", nombre: "Lámina de icopor a la medida",
     desc: "Cortamos la lámina con las medidas que necesites.",
@@ -159,8 +159,6 @@ function estimar() {
   $("#estCotizar").textContent = !area ? "— m²" : aCotizar === null ? "Por definir" : fmt(aCotizar) + " m²";
   // ~65 % del área ocupada por porones (orientativo); no aplica a los bloques de viguetas
   $("#estVolumen").textContent = !area ? "— m³" : viguetas ? "Según el despiece" : aCotizar === null ? "Por definir" : fmt(aCotizar * h * 0.65, 1) + " m³";
-  // 85–120 kg/m² sobre todas las losas construidas, se reutilicen o no los porones
-  $("#estCarga").textContent = !total ? "— t" : viguetas ? "Según el diseño" : `${fmt(total * 0.085, 1)}–${fmt(total * 0.12, 1)} t`;
 }
 ["cArea", "cPisos", "cAltura"].forEach(id => $("#" + id).addEventListener("input", estimar));
 formC.addEventListener("change", e => { if (e.target.name === "metodo" || e.target.name === "alcance") estimar(); });

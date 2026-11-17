@@ -240,6 +240,11 @@ form.formulario { padding: 8px 32px 32px; min-width: 0; }
 .error-planos { display: block; margin-top: 8px; color: var(--error); font-size: .88rem; font-weight: 600; }
 .error-planos:empty { display: none; }
 .trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.consentimiento { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; align-items: start; margin-top: 24px; color: var(--tinta); font-size: .95rem; line-height: 1.45; }
+.consentimiento input { width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--lima); cursor: pointer; }
+.consentimiento label { cursor: pointer; }
+.consentimiento a { text-decoration: underline; }
+.consentimiento .error-campo { grid-column: 2; }
 .pie-formulario { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
 .pie-formulario small { max-width: 34ch; color: var(--suave); }
 .mensaje { display: none; margin-top: 18px; padding: 14px 16px; border: 2px solid; color: var(--tinta); }

@@ -169,7 +169,8 @@ const MENSAJES = {
   cArea: "Escribe el área de cada losa en m², solo con números. Por ejemplo: 100 o 1.250.",
   cNombre: "Escribe tu nombre.",
   cCorreo: "Escribe un correo válido, por ejemplo nombre@empresa.com.",
-  cTelefono: "Escribe un teléfono o WhatsApp de al menos 7 dígitos."
+  cTelefono: "Escribe un teléfono o WhatsApp de al menos 7 dígitos.",
+  cDatos: "Para enviar la solicitud debes autorizar el tratamiento de tus datos."
 };
 function validarCampo(c) {
   let ok = c.id === "cArea" ? leerArea() > 0 : c.checkValidity() && c.value.trim() !== "";
@@ -179,7 +180,7 @@ function validarCampo(c) {
   return ok;
 }
 const requeridos = $$("[required]", formC);
-requeridos.forEach(c => c.addEventListener("input", () => { if (c.getAttribute("aria-invalid") === "true") validarCampo(c); }));
+requeridos.forEach(c => c.addEventListener(c.type === "checkbox" ? "change" : "input", () => { if (c.getAttribute("aria-invalid") === "true") validarCampo(c); }));
 
 /* Planos adjuntos */
 const MAX_PLANOS = 5, MAX_BYTES_PLANOS = 20 * 1024 * 1024;
@@ -228,6 +229,7 @@ formC.addEventListener("submit", async e => {
   d.alcance = alcance();
   const aCotizar = areaACotizar();
   d.area_cotizar = aCotizar === null ? "" : String(aCotizar);
+  d.politica_datos = "2026-11-17"; // versión de la política aceptada
   const boton = $("button[type=submit]", formC), ok = $("#okCotizar"), error = $("#errorCotizar");
   ok.classList.remove("visible"); error.classList.remove("visible");
   boton.disabled = true;

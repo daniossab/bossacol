@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/estilos.css?v=20261117b">
+<link rel="stylesheet" href="/estilos.css?v=20261117c">
 </head>
 <body>
 
@@ -171,8 +171,13 @@
             </div>
           </fieldset>
 
+          <div class="consentimiento">
+            <input type="checkbox" id="cDatos" name="autoriza_datos" value="Sí" required aria-describedby="e-cDatos">
+            <label for="cDatos">Autorizo a BOSSA S.A.S. a tratar mis datos personales para responder esta solicitud, según la <a href="/politica-de-datos/" target="_blank" rel="noopener">Política de tratamiento de datos</a> (Ley 1581 de 2012). *</label>
+            <span class="error-campo" id="e-cDatos"></span>
+          </div>
           <div class="pie-formulario">
-            <small>Al enviar aceptas que te contactemos para dar respuesta a tu solicitud.</small>
+            <small>Te contactaremos solo para responder tu solicitud.</small>
             <button type="submit" class="placa">Solicitar cotización</button>
           </div>
           <div class="mensaje mensaje-ok" id="okCotizar" role="status"></div>
@@ -222,7 +227,7 @@
         </dl>
       </div>
     </div>
-    <div class="legal">© <span id="anio">2026</span> BOSSA S.A.S. · NIT 900.264.878-7. Todos los derechos reservados.</div>
+    <div class="legal">© <span id="anio">2026</span> BOSSA S.A.S. · NIT 900.264.878-7. Todos los derechos reservados. <a href="/politica-de-datos/">Política de tratamiento de datos</a>.</div>
   </div>
 </footer>
 <div class="velo" id="velo"></div>
@@ -241,6 +246,6 @@
 </a>
 
 
-<script src="/app.js?v=20261117b" defer></script>
+<script src="/app.js?v=20261117c" defer></script>
 </body>
 </html>
